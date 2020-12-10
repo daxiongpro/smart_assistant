@@ -31,12 +31,11 @@ class Main:
         self.ui.pushButton_next.clicked.connect(self.Next)
 
     def start(self):
-        # 创建一个关闭事件并设为未触发
-        self.thread_video = Thread_video()
-        self.stopEvent = threading.Event()
-        self.stopEvent.clear()
         self.product = Product(1, '产品一', 5)
         self.now_step = 0
+
+    def Stop(self):
+        Video.stop()
 
     def Pause(self):
         Video.pause()
@@ -58,9 +57,6 @@ class Main:
 
     def Last(self):
         pass
-
-    def Stop(self):
-        Video.stop()
 
     def Play(self):
         if Video.started:
