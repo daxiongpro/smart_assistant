@@ -5,8 +5,8 @@ from Main.Thread import Thread_video
 
 
 class Video(object):
-    started = False
-    __current_thread = None
+    started = False# 视频是否开始播放
+    __current_thread = None # 播放这个视频所调用的线程
 
     def __init__(self, ui: Ui_MainWindow, file_path: str = 'C:/Users/91066/Videos/birthday.mp4') -> object:
         self.thread_video = None
@@ -35,23 +35,27 @@ class Video(object):
                 Video.started = True
                 Video.__current_thread = self.thread_video
 
+    '''
+    类方法可以调用类变量
+    '''
     @classmethod
     def stop(cls):
         if Video.__current_thread is not None:
             Video.__current_thread.stop()
         else:
-            print('Video.__current_thread is not None:')
+            print('Video.__current_thread is None:')
+        Video.started = False
 
     @classmethod
     def pause(cls):
         if Video.__current_thread is not None:
             Video.__current_thread.pause()
         else:
-            print('Video.__current_thread is not None:')
+            print('Video.__current_thread is None:')
 
     @classmethod
     def restart(cls):
         if Video.__current_thread is not None:
             Video.__current_thread.restart()
         else:
-            print('Video.__current_thread is not None:')
+            print('Video.__current_thread is None:')

@@ -25,28 +25,22 @@ class Main:
 
     def add_listener(self):
         # 事件监听
-        self.ui.pushButton_pause.clicked.connect(self.Pause)
-        self.ui.pushButton_restart.clicked.connect(self.Restart)
+        self.ui.pushButton_pause.clicked.connect(Video.pause)
+        self.ui.pushButton_restart.clicked.connect(Video.restart)
         self.ui.pushButton_last.clicked.connect(self.Last)
         self.ui.pushButton_next.clicked.connect(self.Next)
 
     def start(self):
-        self.product = Product(1, '产品一', 5)
-        self.now_step = 0
+        self.product = Product(1, '产品一')
 
     def Stop(self):
         Video.stop()
 
-    def Pause(self):
-        Video.pause()
-
-    def Restart(self):
-        Video.restart()
 
     def Next(self):
-        self.now_step += 1
-        if self.now_step <= self.product.total_steps:
-            if self.product.step[self.now_step] == 0:
+        self.product.now_step += 1
+        if self.product.now_step <= len(self.product.steps) - 1:
+            if self.product.steps[self.product.now_step] == 0:
                 # 播放语音提示
                 print("播放语音提示")
             else:
@@ -61,7 +55,6 @@ class Main:
     def Play(self):
         if Video.started:
             Video.stop()
-            Video.started = False
         video = Video(self.ui)
         video.play()
 
